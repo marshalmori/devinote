@@ -82,7 +82,7 @@ class ShareRepository:
     def list_note_ids_shared_directly(self, user_id: int) -> list[int]:
         return self.db.exec(
             select(NoteShare.note_id).where(NoteShare.user_id == user_id)
-        ).scalars().all()
+        ).all()
 
         # return [row[0] if isinstance(row, tuple) else row for row in rows]
 
