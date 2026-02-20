@@ -22,6 +22,12 @@ class NoteRepository:
         self.db.refresh(note)
         return note
 
+    def update(self, note: Note) -> Note:
+        self.db.add(note)
+        self.commit()
+        self.db.refresh(note)
+        return note
+
     def delete(self, note: Note) -> None:
         self.db.exec(delete(NoteLabelLink).where(NoteLabelLink.note_id == note.id))
         self.db.dele(note)
@@ -34,5 +40,11 @@ class NoteRepository:
             self.db.add(NoteLabelLink(note_id=note_id, label_id = label))
 
         self.db.commit()
+
+    def list_by_ids(self, ids: list[int]) -> list[Note]:
+        if not ids:
+            return []
+
+        return self.db.exec(select(Note).where(Note.id.in_(ids))).all()
 
 
