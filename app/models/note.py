@@ -1,5 +1,3 @@
-
-
 from typing import Optional
 
 from sqlmodel import Field, SQLModel
@@ -12,6 +10,8 @@ class Note(SQLModel, table=True):
     color: Optional[str] = None
     owner_id: int = Field(foreign_key="user.id", index=True)
 
+# DTOs
+
 
 class NoteCreate(SQLModel):
     title: str
@@ -20,7 +20,7 @@ class NoteCreate(SQLModel):
     label_ids: Optional[list[int]] = None
 
 
-class NoteCreate(SQLModel):
+class NoteUpdate(SQLModel):
     title: Optional[str] = None
     content: Optional[str] = None
     color: Optional[str] = None
