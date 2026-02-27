@@ -18,19 +18,19 @@ class NoteRepository:
 
     def create(self, note: Note) -> Note:
         self.db.add(note)
-        self.commit()
+        self.db.commit()
         self.db.refresh(note)
         return note
 
     def update(self, note: Note) -> Note:
         self.db.add(note)
-        self.commit()
+        self.db.commit()
         self.db.refresh(note)
         return note
 
     def delete(self, note: Note) -> None:
         self.db.exec(delete(NoteLabelLink).where(NoteLabelLink.note_id == note.id))
-        self.db.dele(note)
+        self.db.delete(note)
         self.db.commit()
 
     def replace_labels(self, owner_id: int, note_id: int, label_ids: list[int]) -> None:
