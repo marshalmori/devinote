@@ -47,7 +47,7 @@ class LabelRepository:
         return self.db.exec(
             select(NoteLabelLink.label_id).where(
                 NoteLabelLink.note_id == note_id)
-        ).scalars().all()
+        ).all()
 
     def list_note_ids_by_label_ids(self, label_ids: list[int]) -> list[int]:
         if not label_ids:
@@ -55,5 +55,4 @@ class LabelRepository:
 
         return self.db.exec(
             select(NoteLabelLink.note_id).where(
-                NoteLabelLink.label_id.in_(label_ids))
-        ).scalars().all()
+                NoteLabelLink.label_id.in_(label_ids))).all()
